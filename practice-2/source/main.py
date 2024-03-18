@@ -66,9 +66,9 @@ def men_and_women_in_each_major_category_chart():
     # sum number of men and women in each major category
     data = data.groupby(["Major_category"]).agg({"Men": "sum", "Women": "sum"})
     # save and show the graph
-    data.plot(kind="barh", figsize=(50, 100))
+    data.plot(kind="barh")
     plt.legend(loc="upper right")
-    plt.savefig("results/men_and_women_in_each_major_category.png")
+    plt.savefig("results/men_and_women_in_each_major_category.png", bbox_inches="tight")
     plt.show()
 
 
