@@ -1,4 +1,3 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -6,6 +5,7 @@ import pandas as pd
 COVID_19_CASES_CSV = "data/covid_19_cases.csv"
 COVID_19_DEATHS_CSV = "data/covid_19_deaths.csv"
 COVID_LATEST_CSV = "data/owid_covid_latest.csv"
+MAJOR_SAMPLES_CSV = "data/samples.csv"
 
 
 def vietnam_covid_cases_and_deaths_graph():
@@ -60,9 +60,22 @@ def covid_total_cases_by_country_piechart():
     plt.show()
 
 
+def men_and_women_in_each_major_category_chart():
+    # read the major samples data
+    data = pd.read_csv(MAJOR_SAMPLES_CSV)
+    # sum number of men and women in each major category
+    data = data.groupby(["Major_category"]).agg({"Men": "sum", "Women": "sum"})
+    # save and show the graph
+    data.plot(kind="barh", figsize=(50, 100))
+    plt.legend(loc="upper right")
+    plt.savefig("results/men_and_women_in_each_major_category.png")
+    plt.show()
+
+
 def main():
     vietnam_covid_cases_and_deaths_graph()
     covid_total_cases_by_country_piechart()
+    men_and_women_in_each_major_category_chart()
 
 
 if __name__ == "__main__":
